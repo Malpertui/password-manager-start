@@ -34,10 +34,10 @@ def write_into_file():
     print(password)
     website = website_entry.get()
     print(website)
-    written_data = (f'\nEmail: {email}\n'
+    written_data = (f'Email: {email}\n'
                     f'Website: {website}\n'
                     f'Password: {password}\n'
-                    f'=================================')
+                    f'=================================\n')
     with open(f'data.txt', 'a') as file:
         file.write(written_data)
 
