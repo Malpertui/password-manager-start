@@ -61,16 +61,16 @@ website_label = Label(text="Website:", bg='white', font=("Arial", 14))
 website_label.grid(column=0, row=1)
 website_label.config(padx=10, pady=10)
 
-website_entry = Entry(width=45, bd=2)
-website_entry.grid(column=1, row=1, columnspan=2)
+website_entry = Entry(width=48, bd=2)
+website_entry.grid(column=1, row=1, columnspan=2, sticky='e')
 website_entry.focus()
 
 email_label = Label(text="Email/Username:", bg='white', font=("Arial", 14))
 email_label.grid(column=0, row=2)
 email_label.config(padx=10, pady=10)
 
-email_entry = Entry(width=45, bd=2)
-email_entry.grid(column=1, row=2, columnspan=2)
+email_entry = Entry(width=48, bd=2)
+email_entry.grid(column=1, row=2, columnspan=2, sticky='e')
 email_entry.insert(0, "malpertui@gmail.com")
 
 password_label = Label(text="Password:", bg='white', font=("Arial", 14))
