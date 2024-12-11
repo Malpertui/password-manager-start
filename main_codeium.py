@@ -1,9 +1,8 @@
 from tkinter import *
 from random import choice
-from tkinter import messagebox
 
-import pyperclip
-
+# Constants
+PASSWORD_LENGTH = 9
 special_characters = ['!', '#', '$', '%', '&', '(', ')', '*',
                       '+', ',', '-', '.', '/', ':', ';', '<', '=',
                       '>', '?', '@', '[', ']', '^', '_', '{', '|',
@@ -13,7 +12,7 @@ letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L',
            'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'X', 'Y', 'Z']
 
 def generate_password():
-    password_len = 9
+    password_len = PASSWORD_LENGTH
     password=''
     for _ in range(password_len):
         what_symbol = choice([1, 2, 3])
@@ -29,34 +28,25 @@ def generate_password():
             password += choice(special_characters)
     password_entry.delete(0, 'end')
     password_entry.insert(0, password)
-    pyperclip.copy(password)
 
 def write_into_file():
     email = email_entry.get()
+    print(email)
     password = password_entry.get()
+    print(password)
     website = website_entry.get()
+    print(website)
+    written_data = (f'\nEmail: {email}\n'
+                    f'Website: {website}\n'
+                    f'Password: {password}\n'
+                    f'=================================')
+    with open(f'data.txt', 'a') as file:
+        file.write(written_data)
 
-    if len(email) < 1 or len(password) < 1 or len(website) < 1:
-        messagebox.showinfo(title='OOOooops!', message='It appears you leave'
-                                                       ' some of the fields empty.\n'
-                                                       'Please fill in all fields')
-    else:
-        # messagebox.showinfo(title='Title', message='Message')
-        is_ok = messagebox.askokcancel(title=website, message=f'These are the details entered: '
-                                                      f'\nEmail: {email}\nPassword: {password}. '
-                                                      f'Is it ok to save?')
-        if is_ok:
-            written_data = (f'Email: {email}\n'
-                            f'Website: {website}\n'
-                            f'Password: {password}\n'
-                            f'=================================\n')
-            with open(f'data.txt', 'a') as file:
-                file.write(written_data)
-
-            password_entry.delete(0, 'end')
-            website_entry.delete(0, 'end')
-            email_entry.delete(0, 'end')
-            email_entry.insert(0, "malpertui@gmail.com")
+    password_entry.delete(0, 'end')
+    website_entry.delete(0, 'end')
+    email_entry.delete(0, 'end')
+    email_entry.insert(0, "malpertui@gmail.com")
 
 
 window = Tk()
@@ -73,23 +63,23 @@ website_label = Label(text="Website:", bg='white', font=("Arial", 14))
 website_label.grid(column=0, row=1)
 website_label.config(padx=10, pady=10)
 
-website_entry = Entry(width=48, bd=2)
-website_entry.grid(column=1, row=1, columnspan=2, sticky='e')
+website_entry = Entry(width=45)
+website_entry.grid(column=1, row=1, columnspan=2)
 website_entry.focus()
 
 email_label = Label(text="Email/Username:", bg='white', font=("Arial", 14))
 email_label.grid(column=0, row=2)
 email_label.config(padx=10, pady=10)
 
-email_entry = Entry(width=48, bd=2)
-email_entry.grid(column=1, row=2, columnspan=2, sticky='e')
+email_entry = Entry(width=45)
+email_entry.grid(column=1, row=2, columnspan=2)
 email_entry.insert(0, "malpertui@gmail.com")
 
 password_label = Label(text="Password:", bg='white', font=("Arial", 14))
 password_label.grid(column=0, row=3)
 password_label.config(padx=10, pady=10)
 
-password_entry = Entry(width=27, bd=2)
+password_entry = Entry(width=27)
 password_entry.grid(column=1, row=3)
 
 generate_password_button = Button(text="Generate Password", command=generate_password)

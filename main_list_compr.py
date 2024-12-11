@@ -1,7 +1,6 @@
 from tkinter import *
 from random import choice
 from tkinter import messagebox
-
 import pyperclip
 
 special_characters = ['!', '#', '$', '%', '&', '(', ')', '*',
@@ -27,6 +26,13 @@ def generate_password():
             password += str(choice(numbers))
         else:
             password += choice(special_characters)
+    what_symbol = choice([1, 2, 3])
+    # upper_or_lower = choice([1, 2])
+    password_list = [choice(letters) if what_symbol == 1 else choice(numbers) if what_symbol == 2 else choice(special_characters)  for char in range(password_len)]
+    print(f'password:{password}')
+    print(f'password_2: {password_list}')
+    print(f'password_2: {len(password_list)}')
+
     password_entry.delete(0, 'end')
     password_entry.insert(0, password)
     pyperclip.copy(password)
