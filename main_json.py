@@ -57,7 +57,7 @@ def write_into_file():
             # with open('data.json', 'r') as file:
             #     data = json.load(file)
             #     print(data)
-            try:
+            # try:
             with open('data.json', 'r') as file:
                 data = json.load(file)
                 data.update(new_data)
