@@ -44,6 +44,8 @@ def write_into_file():
         messagebox.showinfo(title='OOOooops!', message='It appears you leave'
                                                        ' some of the fields empty.\n'
                                                        'Please fill in all fields')
+
+    # ---------------------------- My version ------------------------------- #
     else:
         # messagebox.showinfo(title='Title', message='Message')
         is_ok = messagebox.askokcancel(title=website, message=f'These are the details entered: '
@@ -57,20 +59,50 @@ def write_into_file():
             # with open('data.json', 'r') as file:
             #     data = json.load(file)
             #     print(data)
-            # try:
-            with open('data.json', 'r') as file:
-                data = json.load(file)
-                data.update(new_data)
+            try:
+                with open('data.json', 'r') as file:
+                    data = json.load(file)
+                    data.update(new_data)
 
-            with open('data.json', 'w') as file:
-                json.dump(data, file, indent=4)
+                with open('data.json', 'w') as file:
+                    json.dump(data, file, indent=4)
+            except FileNotFoundError:
+                with open('data.json', 'w') as file:
+                    json.dump(new_data, file, indent=4)
 
-
+    # I did not use finally and else blocks, and I added update and write into try block
+    # Also I used these lines:
+    #         email_entry.delete(0, 'end')
+    #         email_entry.insert(0, "malpertui@gmail.com")
 
             password_entry.delete(0, 'end')
             website_entry.delete(0, 'end')
             email_entry.delete(0, 'end')
             email_entry.insert(0, "malpertui@gmail.com")
+
+    # ---------------------------- End of my version ------------------------------- #
+
+    # ---------------------------- Angela's version ------------------------------- #
+    # else:
+    #     try:
+    #         with open('data.json', 'r') as file:
+    #             data = json.load(file)
+    #
+    #     except FileNotFoundError:
+    #         with open('data.json', 'w') as file:
+    #             json.dump(new_data, file, indent=4)
+    #     else:
+    #         data.update(new_data)
+    #
+    #         with open('data.json', 'w') as file:
+    #             json.dump(data, file, indent=4)
+    #
+    #     finally:
+    #         password_entry.delete(0, 'end')
+    #         website_entry.delete(0, 'end')
+
+    # ---------------------------- End of Angela's version ------------------------------- #
+
 
 
 window = Tk()
