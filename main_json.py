@@ -1,8 +1,8 @@
 from tkinter import *
 from random import choice
 from tkinter import messagebox
-
 import pyperclip
+import json
 
 special_characters = ['!', '#', '$', '%', '&', '(', ')', '*',
                       '+', ',', '-', '.', '/', ':', ';', '<', '=',
@@ -35,6 +35,10 @@ def write_into_file():
     email = email_entry.get()
     password = password_entry.get()
     website = website_entry.get()
+    new_data = {website:
+                {'email': email,
+                'password': password,}
+                }
 
     if len(email) < 1 or len(password) < 1 or len(website) < 1:
         messagebox.showinfo(title='OOOooops!', message='It appears you leave'
@@ -46,12 +50,22 @@ def write_into_file():
                                                       f'\nEmail: {email}\nPassword: {password}. '
                                                       f'Is it ok to save?')
         if is_ok:
-            written_data = (f'Email: {email}\n'
-                            f'Website: {website}\n'
-                            f'Password: {password}\n'
-                            f'=================================\n')
-            with open(f'data.txt', 'a') as file:
-                file.write(written_data)
+
+            # with open(f'data.json', 'w') as file:
+            #     json.dump(new_data, file, indent = 4)
+
+            # with open('data.json', 'r') as file:
+            #     data = json.load(file)
+            #     print(data)
+            try:
+            with open('data.json', 'r') as file:
+                data = json.load(file)
+                data.update(new_data)
+
+            with open('data.json', 'w') as file:
+                json.dump(data, file, indent=4)
+
+
 
             password_entry.delete(0, 'end')
             website_entry.delete(0, 'end')
